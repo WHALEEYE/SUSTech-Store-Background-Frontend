@@ -53,7 +53,7 @@
     <el-dialog :title="dialog.title" :visible.sync="dialog.visible" width="800px">
       <el-form ref="form" :model="form" label-width="100px">
         <el-form-item label="new">
-          <el-input v-model="form.new" placeholder="new password" />
+          <el-input type="password" v-model="form.new" placeholder="new password" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -189,7 +189,7 @@ export default {
     },
     async handleUpdate(row) {
       this.dialog = {
-        title: 'change password',
+        title: 'Change Password',
         visible: true
       }
     },

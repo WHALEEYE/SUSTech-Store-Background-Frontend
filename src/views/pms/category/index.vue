@@ -215,14 +215,20 @@ export default {
         that.pageList.splice(index, 0, upDate)
         this.handleMoveUp(row)
       } else {
-        alert('Already the last one')
+        this.$message({
+          type: 'error',
+          message: 'Already the first one'
+        })
       }
     },
     move_Down(index, row) {
       var that = this
       console.log('下移', index, row)
       if ((index + 1) === that.pageList.length) {
-        alert('Already the first one')
+        this.$message({
+          type: 'error',
+          message: 'Already the last one'
+        })
       } else {
         console.log(index)
         const downDate = that.pageList[index + 1]

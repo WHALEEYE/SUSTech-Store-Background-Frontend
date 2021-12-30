@@ -94,12 +94,12 @@
           <el-input v-model="form.username" placeholder="please input username" />
         </el-form-item>
         <el-form-item label="password" prop="password">
-          <el-input v-model="form.password" placeholder="password: 6-20 numbers+letters" />
+          <el-input v-model="form.password" type="password" placeholder="password: 6-20 numbers+letters" />
         </el-form-item>
         <el-form-item label="role">
           <el-select v-model="form.roleId" placeholder="please choose">
             <el-option label="Admin" :value="2" />
-            <el-option label="Checker" :value="1" />
+            <!--            <el-option label="Checker" :value="1" />-->
           </el-select>
         </el-form-item>
 
@@ -113,11 +113,9 @@
 </template>
 
 <script>
-import { add, del, ban, unban, list, patch, update } from '@/api/system/user'
-import { getDeptSelectList } from '@/api/system/dept'
+import { add, ban, del, list, patch, unban } from '@/api/system/user'
 import { getList } from '@/api/system/role'
 import TreeSelect from '@riophae/vue-treeselect'
-import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import { removeToken } from '@/utils/auth'
 import Pagination from '@/components/Pagination'
@@ -221,7 +219,7 @@ export default {
     async handleAdd() {
       this.resetForm()
       this.dialog = {
-        title: 'new user added',
+        title: 'Add New User',
         visible: true
       }
       // await this.loadData()
@@ -327,9 +325,19 @@ export default {
       })
         .catch(err => {
           /*        removeToken()
-          this.$router.go(0)*/
+            this.$router.go(0)*/
           console.log('token has expired')
         })
+    },
+
+    checkName(username) {
+      for (var i in this.pageList) {
+        if (this.pageList[i].username === username) {
+          this.$message.error('the username has been used')
+          return false
+        }
+      }
+      return true
     },
 
     resetForm() {
